@@ -7,11 +7,7 @@ from aiogram import Dispatcher
 from aiogram import types
 from aiogram.filters import CommandStart, Command
 
-
-# BOT_TOKEN = "7355417367:AAEvTenRqpck40AxxNNQ1FTIjpFylZfFAmI"
-
 dp = Dispatcher()
-
 
 @dp.message(CommandStart())
 async def handle_start(message: types.Message):
@@ -19,7 +15,6 @@ async def handle_start(message: types.Message):
         - Для получения ответа от ChatGPT, введите команду /gpt \n\n- Для формирования заявки в поддержку, введите команду /support
     """
     await message.answer(text=text)
-
 
 
 # @dp.message()
