@@ -13,10 +13,22 @@ dp = Dispatcher()
 
 @dp.message(CommandStart())
 async def handle_start(message: types.Message):
-    text = """
-        - Для получения ответа от ChatGPT, введите команду /gpt \n\n- Для формирования заявки в поддержку, введите команду /support
-    """
-    await message.answer(text=text)
+    text = markdown.text(
+        "👋 Давайте приступим\! Как я могу вам помочь?\n",
+        markdown.markdown_decoration.bold(
+            markdown.text(
+                "📍Задать вопрос ChatGPT \- /ask\_gpt\n📍Написать в поддержку \- /support\n"
+            )
+        ),
+        markdown.text(
+            "Для выбора, просто нажмите на нужную команду\.\n"
+        ),
+        sep="\n"
+    )
+    await message.answer(
+        text=text,
+        parse_mode=ParseMode.MARKDOWN_V2
+    )
 
 
 @dp.message(Command("help"))
@@ -45,7 +57,6 @@ async def hndle_help(message: types.Message):
         ),
         sep="\n"
     )
-
     await message.answer(
         text=text,
         parse_mode=ParseMode.MARKDOWN_V2
