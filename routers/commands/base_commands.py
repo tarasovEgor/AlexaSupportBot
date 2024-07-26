@@ -6,6 +6,7 @@ from aiogram.utils import markdown
 
 router = Router(name=__name__)
 
+
 @router.message(CommandStart())
 async def handle_start(message: types.Message):
     text = markdown.text(
