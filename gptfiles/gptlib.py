@@ -1,15 +1,25 @@
-from g4f.client import Client
-from g4f.Provider import RetryProvider, Phind, DeepInfra, Liaobots, Aichatos, You, AItianhuSpace
+from openai import AsyncOpenAI
+from config import OPEN_AI_TOKEN, PROXY_URL
 
-def ask_chatGPT(question: str) -> str:
-    client = Client(
-        provider=RetryProvider([Phind, You, AItianhuSpace], shuffle=False)
+
+client = AsyncOpenAI(
+    api_key=OPEN_AI_TOKEN,
+    base_url=PROXY_URL,
+)
+
+async def gpt4(question):
+    response = await client.chat.completions.create(
+        messages=[{"role": "user",
+                   "content": str(question)}],
+        model="gpt-3.5-turbo"
     )
-    response = client.chat.completions.create(
-        model="",
-        messages=[{"role": "user", "content": question}],
-    )
-    return response.choices[0].message.content
-    # core.play_voice_assistant_speech(response.choices[0].message.content)
-    # core.play_voice_assistant_speech("Удалось решить проблему? да/нет")
-    # core.context_set(check_answer_quality, 20)
+    return response
+
+
+
+# client = AsyncOpenAI(api_key=OPEN_AI_TOKEN,
+#                      http_client=httpx.AsyncClient(
+#                          proxies=PROXY,
+#                          transport=httpx.HTTPTransport(local_address="0.0.0.0")
+#                         )
+#                     )
