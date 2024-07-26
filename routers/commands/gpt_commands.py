@@ -4,7 +4,7 @@ from aiogram.utils import markdown
 from aiogram.enums import ParseMode
 from aiogram.fsm.context import FSMContext
 
-from gptfiles.gptlib import gpt4
+from utils.gptlib import gpt4
 
 from states.gpt_states import GPTQuery
 
@@ -41,6 +41,13 @@ async def handle_gptquery_user_question(message: types.Message, state: FSMContex
         parse_mode=ParseMode.MARKDOWN_V2
     )
     await state.set_state(GPTQuery.user_is_satisfied)
+
+
+@router.message(GPTQuery.user_question)
+async def handle_gptquery_invalid_user_question(message: types.Message):
+    await message.answer(
+        "Извините, не совсем поняла ваш вопрос.. 🙃\n"
+    )
 
 
 @router.message(GPTQuery.user_is_satisfied, F.text)
