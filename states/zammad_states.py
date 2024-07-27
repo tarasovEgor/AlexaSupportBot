@@ -1,6 +1,5 @@
 from aiogram.fsm.state import StatesGroup, State
 
-
 class ZammadQuery(StatesGroup):
     user_question = State()
     user_name = State()

@@ -7,7 +7,6 @@ client = AsyncOpenAI(
     base_url=PROXY_URL,
 )
 
-
 async def gpt4(question):
     response = await client.chat.completions.create(
         messages=[{"role": "user",
