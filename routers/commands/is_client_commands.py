@@ -15,15 +15,3 @@ async def handle_is_client(message: types.Message, state: FSMContext):
     await message.answer(
         "вы клиент"
     )
-    # if message.text.lower() == 'да':
-    #     await message.answer(
-    #         "вы клиент"
-    #     )
-    # elif message.text.lower() == 'нет':
-    #     await message.answer(
-    #         "вы не клиент"
-    #     )
-    # else:
-    #     await message.answer(
-    #         "вы долбаеб"
-    #     )
