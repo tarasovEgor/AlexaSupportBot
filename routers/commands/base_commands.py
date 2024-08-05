@@ -1,14 +1,21 @@
-from aiogram import types, Router
+from aiogram import types, Router, F
 from aiogram.enums import ParseMode
 from aiogram.filters import CommandStart, Command
+from aiogram.fsm.context import FSMContext
 from aiogram.utils import markdown
 
+from .is_client_commands import handle_is_client
+from .new_client_commands import handle_new_client
+
+from states.is_client_states import IsClientQuery
+from states.new_client_states import NewClientQuery
+from states.ask_if_client_states import AskIfClientQuery
 
 router = Router(name=__name__)
 
 
 @router.message(CommandStart())
-async def handle_start(message: types.Message):
+async def handle_start(message: types.Message, state: FSMContext):
     text = markdown.text(
         "Давайте приступим\! 👋\n\n"
         "📍Подскажите, пожалуйста, являетесь ли вы нашим клиентом?\n\n"
@@ -31,6 +38,23 @@ async def handle_start(message: types.Message):
         text=text,
         parse_mode=ParseMode.MARKDOWN_V2
     )
+    await state.set_state(AskIfClientQuery.is_client)
+
+
+@router.message(AskIfClientQuery.is_client, F.text)
+async def handle_ask_if_client(message: types.Message, state: FSMContext):
+    if message.text.lower() == 'да':
+        await state.clear()
+        await state.set_state(IsClientQuery.full_name)
+        await handle_is_client(message, state)
+    elif message.text.lower() == 'нет':
+        await state.clear()
+        await state.set_state(NewClientQuery.PC_count)
+        await handle_new_client(message, state)
+    else:
+        await message.answer(
+            "не поняла"
+        )
 
 
 @router .message(Command("help"))
