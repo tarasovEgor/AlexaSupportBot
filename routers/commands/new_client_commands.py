@@ -6,7 +6,6 @@ from aiogram.fsm.context import FSMContext
 
 from states.new_client_states import NewClientQuery
 
-
 router = Router(name=__name__)
 
 

@@ -8,11 +8,10 @@ from utils.gptlib import gpt4
 
 from states.gpt_states import GPTQuery
 
-
 router = Router(name=__name__)
 
 
-@router.message(Command("ask_gpt"))
+@router.message(Command("ask_alexa"))
 async def handle_ask_gpt(message: types.Message, state: FSMContext):
     await state.set_state(GPTQuery.user_question)
     await message.answer(
@@ -60,7 +59,7 @@ async def handle_is_satisfied(message: types.Message, state: FSMContext):
             "Давайте попробуем еще раз\, если ответ все еще не удовлетворительный\, то лучше обратиться в нашу ",
             markdown.markdown_decoration.bold(
                 markdown.text(
-                    "службу поддержки\. 🔧\n\n📍Задать вопрос ChatGPT \- /ask\_gpt\n📍Написать в поддержку \- /support\n"
+                    "службу поддержки\. 🔧\n\n📍Задать вопрос Алексе \- /ask\_alexa\n📍Написать в поддержку \- /support\n"
                 )
             ),
             sep="\n"
