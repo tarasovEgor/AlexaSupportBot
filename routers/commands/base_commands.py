@@ -6,9 +6,10 @@ from aiogram.utils import markdown
 
 from .is_client_commands import handle_is_client
 from .new_client_commands import handle_new_client
+from .is_client_commands import router as is_client_commands_router
 
-from states.is_client_states import IsClientQuery
-from states.new_client_states import NewClientQuery
+# from states.is_client_states import IsClientQuery
+# from states.new_client_states import NewClientQuery
 from states.ask_if_client_states import AskIfClientQuery
 
 router = Router(name=__name__)
@@ -44,17 +45,27 @@ async def handle_start(message: types.Message, state: FSMContext):
 @router.message(AskIfClientQuery.is_client, F.text)
 async def handle_ask_if_client(message: types.Message, state: FSMContext):
     if message.text.lower() == 'да':
-        await state.clear()
-        await state.set_state(IsClientQuery.full_name)
         await handle_is_client(message, state)
     elif message.text.lower() == 'нет':
-        await state.clear()
-        await state.set_state(NewClientQuery.PC_count)
         await handle_new_client(message, state)
     else:
-        await message.answer(
-            "не поняла"
+        text = markdown.text(
+            "Пожалуйста, укажите",
+            markdown.markdown_decoration.bold(markdown.text("да")),
+            "или",
+            markdown.markdown_decoration.bold(markdown.text("нет 🙃"))
         )
+        await message.answer(
+            text=text,
+            parse_mode=ParseMode.MARKDOWN_V2
+        )
+
+
+@router.message(AskIfClientQuery.is_client)
+async def handle_invalid_ask_if_client(message: types.Message):
+    await message.answer(
+        "Не разобрала, повторите, пожалуйста.. 🙃"
+    )
 
 
 @router .message(Command("help"))
