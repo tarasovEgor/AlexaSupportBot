@@ -8,18 +8,18 @@ async def submit_to_zammad(zammad_user_info: dict) -> None:
         'Content-Type': 'application/json'
     }
     payload = {
-        'title': 'Question from' + zammad_user_info['user_inn'],
+        'title': 'Question from' + zammad_user_info['inn'],
         'group': 'Техническая поддержка',
         'article': {
             'subject': 'Support request',
-            'body': zammad_user_info['user_question'],
+            'body': zammad_user_info['question'],
             'type': 'note',
             'internal': False
         },
         'customer': {
-            'firstname': zammad_user_info['user_name'],
-            'email': zammad_user_info['user_email'],
-            'phone': zammad_user_info['user_phone_number']
+            'firstname': zammad_user_info['full_name'],
+            'email': zammad_user_info['email'],
+            'phone': zammad_user_info['phone_number']
         },
         'note': 'forwarded by bot'
     }
