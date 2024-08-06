@@ -2,8 +2,8 @@ from aiogram import Router, types
 from aiogram.utils import markdown
 from aiogram.enums import ParseMode
 
-
 router = Router(name=__name__)
+
 
 @router.message()
 async def handle_common_messages(message: types.Message):
@@ -12,7 +12,7 @@ async def handle_common_messages(message: types.Message):
             "Не совсем поняла вас\.\. 🙃\nВот список того\, что я пока что умею:\n",
             markdown.markdown_decoration.bold(
                 markdown.text(
-                    "\n📍Задать вопрос ChatGPT \- /ask\_gpt\n📍Написать в поддержку \- /support\n"
+                    "\n📍Задать вопрос Алексе \- /ask\_alexa\n📍Написать в поддержку \- /support\n"
                     )
                 )
         )
