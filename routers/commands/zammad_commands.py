@@ -141,21 +141,21 @@ async def handle_support(message: types.Message, state: FSMContext):
 #     )
 
 
-@router.message(ZammadQuery.user_phone_number, F.text)
-async def handle_user_phone_number(message: types.Message, state: FSMContext):
-    zammad_user_data = await state.update_data(user_phone_number=message.text)
-    await state.clear()
-    await message.answer(
-        "⏳ Формирую заявку...\n"
-    )
-    await submit_to_zammad(zammad_user_data)
-    await message.answer(
-        "☺️ Заявка успешно сформирована, в ближайшее время с вами свяжется наш специалист.\n"
-    )
+# @router.message(ZammadQuery.user_phone_number, F.text)
+# async def handle_user_phone_number(message: types.Message, state: FSMContext):
+#     zammad_user_data = await state.update_data(user_phone_number=message.text)
+#     await state.clear()
+#     await message.answer(
+#         "⏳ Формирую заявку...\n"
+#     )
+#     await submit_to_zammad(zammad_user_data)
+#     await message.answer(
+#         "☺️ Заявка успешно сформирована, в ближайшее время с вами свяжется наш специалист.\n"
+#     )
     
 
-@router.message(ZammadQuery.user_phone_number)
-async def handle_invalid_user_phone_number(message: types.Message):
-    await message.answer(
-        "Неверный номер, повторите, пожалуйста.. 🙃"
-    )
+# @router.message(ZammadQuery.user_phone_number)
+# async def handle_invalid_user_phone_number(message: types.Message):
+#     await message.answer(
+#         "Неверный номер, повторите, пожалуйста.. 🙃"
+#     )
