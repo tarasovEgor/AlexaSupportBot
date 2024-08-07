@@ -2,6 +2,7 @@ import requests
 
 from config import ZAMMAD_API_KEY, ZAMMAD_URL
 
+
 async def submit_to_zammad(zammad_user_info: dict) -> None:
     headers = {
         'Authorization': f'Bearer {ZAMMAD_API_KEY}',
