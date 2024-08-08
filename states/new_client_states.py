@@ -6,11 +6,3 @@ class NewClientInfrastructureQuery(StatesGroup):
     office_count = State()
     consent_recieved = State()
     program_type = State()
-
-
-class NewClientInfoQuery(StatesGroup):
-    city = State()
-    company_name = State()
-    company_address = State()
-    phone_number = State()
-    inn = State()
