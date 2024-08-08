@@ -13,6 +13,7 @@ router = Router(name=__name__)
 
 @router.message(Command("ask_alexa"))
 async def handle_ask_gpt(message: types.Message, state: FSMContext):
+    # check if the user is authorized
     await state.set_state(GPTQuery.user_question)
     await message.answer(
         "✏️Пожалуйтста, опишите возникшую проблему: \n"

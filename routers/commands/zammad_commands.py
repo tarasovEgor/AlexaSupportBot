@@ -5,7 +5,7 @@ from aiogram.utils import markdown
 from aiogram.fsm.context import FSMContext
 
 from utils.zammadlib import submit_to_zammad
-from utils.validators import validate_email_address
+# from utils.validators import validate_email_address
 
 from states.zammad_states import ZammadQuery
 from states.is_client_states import IsClientQuery

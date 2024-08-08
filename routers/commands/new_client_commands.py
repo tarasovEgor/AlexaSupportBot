@@ -4,6 +4,8 @@ from aiogram.filters import Command
 from aiogram.utils import markdown
 from aiogram.fsm.context import FSMContext
 
+from .form_contract_commands import handle_form_new_contract
+
 from states.new_client_states import NewClientInfrastructureQuery
 
 from utils.plancalc import calculate_plan_price
@@ -123,7 +125,7 @@ async def handle_program_type(message: types.Message):
 async def handle_consent_recieved(message: types.Message, state: FSMContext):
     if message.text.lower() == "да":
         client_infrastructure_data = await state.update_data(consent_recieved=message.text)
-        # await handle_form_new_contract_data(message, data, client_infrastructure_data)
+        await handle_form_new_contract(message, state, client_infrastructure_data)
     elif message.text.lower() == "нет":
         await state.clear()
         text = markdown.text(
