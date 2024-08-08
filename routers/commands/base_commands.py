@@ -6,7 +6,7 @@ from aiogram.utils import markdown
 
 from .is_client_commands import handle_is_client
 from .new_client_commands import handle_new_client
-from .is_client_commands import router as is_client_commands_router
+# from .is_client_commands import router as is_client_commands_router
 
 # from states.is_client_states import IsClientQuery
 # from states.new_client_states import NewClientQuery
